@@ -37,6 +37,10 @@ line=`grep -n "$p$" $file  | awk -F ':' '{print $1}'`
 1. `sed`/`gsed`是“stream editor”，无法修改空文件，因此创建的文件不能是空文件，即只使用`touch`创建此文件是不够的，可以直接用`echo $HOME > $file`创建一个默认含有用户家目录的文件；
 2. 每个目录字符串都是前缀码，故可简化在文件中判断某路径是否存在的表达式为`grep -q "$p$" $file `，即忽略正则表达式中的`^/`，其在`grep`的匹配中和变量引用的`$`在一起会产生混淆以致无法得到正确的搜索结果；
 3. 存储的路径开头为两个`/`，这是导致各种匹配问题的根源；
+4. `==`或`=`均可用于字符串比较，两边都要有空格，变量赋值的`=`两边不能有空格；
+5. `[]`等同`test`，其中不能使用`||`，`&&`等，而`[[  ]]`可以
+
+Code:
 
 ```shell
 #! /bin/zsh
@@ -87,6 +91,28 @@ then
     then 
         cd `gsed -n '3, 3p' $file`
     elif [ $2 -eq 4 ]
+    then 
+        cd `gsed -n '4, 4p' $file`
+    elif [ $2 -eq 5 ]
+    then 
+        cd `gsed -n '5, 5p' $file`
+    elif [ $2 -eq 6 ]
+    then 
+        cd `gsed -n '6, 6p' $file`
+    else
+        echo "out of index"
+    fi
+elif [[ $1 == "-h" || $1 == "--help" ]]
+then
+    echo "file location: "
+    ls -lT $file
+    echo "-- use '-s' to save path;\n-- use '-o' to display saved path;\n-- use '-c' to change directory.\n"
+elif [ $# -eq 0 ]
+then 
+    cd `gsed -n '1, 1p' $file`
+else
+    echo "mjump: wrong arguments.\n-- use '-s' to save path;\n--use '-o' to display saved path;\n-- use '-c' to change directory.\n"
+fi
 ```
 
 运行:
