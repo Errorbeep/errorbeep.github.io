@@ -229,5 +229,5 @@ int main()
 }
 ```
 
-下一篇：[服务端(多线程, 面向对象)](https://errorbeep.github.io/verbose-engine.io/服务端(多线程,-面向对象))
+下一篇：[服务端(多线程, 面向对象)](https://errorbeep.github.io/服务端(多线程,-面向对象))
 

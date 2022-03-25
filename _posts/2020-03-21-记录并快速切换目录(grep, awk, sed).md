@@ -117,7 +117,7 @@ fi
 
 运行:
 <div align="left">
-    <img src="https://errorbeep.github.io/verbose-engine.io/images/shell01.png" width="50%">
+    <img src="https://errorbeep.github.io/images/shell01.png" width="50%">
 </div>
 使用了如下别名：
 ```shell
